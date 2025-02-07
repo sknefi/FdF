@@ -4,7 +4,7 @@
 NAME        = fdf
 
 # Source Files
-SRCS        = main.c
+SRCS        = src/main.c
 OBJS        = $(SRCS:.c=.o)
 
 # Compiler & Flags
