@@ -21,7 +21,6 @@ static int	insert_points(t_map *map, char **split_line, int curr_y_index)
 		map->matrix[curr_y_index][curr_x_index].y = curr_y_index;
 		map->matrix[curr_y_index][curr_x_index].z = ft_atoi(
 				split_line[curr_x_index]);
-		map->matrix[curr_y_index][curr_x_index].color = 0xFFFFFF;
 		curr_x_index++;
 	}
 	free_split(split_line);

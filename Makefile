@@ -7,9 +7,11 @@ NAME        = fdf
 SRCS        = 	\
 				src/utils.c \
 				src/parser.c \
-				src/main.c \
 				src/memory_cleanup.c \
-				
+				src/iso_projection.c \
+				src/graphic.c \
+				src/graphic_utils.c \
+				src/main.c \
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -34,6 +36,7 @@ LIBS = -L/opt/homebrew/lib -lglfw -ldl -lm -framework OpenGL
 # Build Rules
 all: $(NAME)
 
+# Link .o to executable
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_INC) $(LIBS) -o $(NAME)
 
@@ -49,6 +52,7 @@ fclean: clean
 	$(RM) $(NAME)
 #make -C $(LIBFT_DIR) fclean
 
+# Build libft
 libft:
 	make -C $(LIBFT_DIR) re
 
