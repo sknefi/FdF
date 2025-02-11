@@ -8,6 +8,7 @@ SRCS        = 	\
 				src/utils.c \
 				src/parser.c \
 				src/main.c \
+				src/memory_cleanup.c \
 				
 
 OBJS        = $(SRCS:.c=.o)
@@ -34,7 +35,6 @@ LIBS = -L/opt/homebrew/lib -lglfw -ldl -lm -framework OpenGL
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_INC) $(LIBS) -o $(NAME)
 
 # Compile .c to .o
@@ -43,11 +43,14 @@ $(NAME): $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
-	make -C $(LIBFT_DIR) clean
+#make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
-	make -C $(LIBFT_DIR) fclean
+#make -C $(LIBFT_DIR) fclean
+
+libft:
+	make -C $(LIBFT_DIR) re
 
 re: fclean all
 

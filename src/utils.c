@@ -1,5 +1,11 @@
 #include "fdf.h"
 
+
+/**
+ * @brief Counts the number of lines in a file.
+ * @param filename The name of the file.
+ * @return -1 if an error occurs, otherwise the number of lines.
+*/
 int	new_line_count(char *filename)
 {
 	int		fd;
