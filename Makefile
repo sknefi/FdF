@@ -6,7 +6,7 @@ NAME        = fdf
 # Source Files
 SRCS        = 	\
 				src/utils.c \
-				src/parser.c \
+				src/map.c \
 				src/memory_cleanup.c \
 				src/iso_projection.c \
 				src/graphic.c \

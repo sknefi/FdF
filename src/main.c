@@ -8,7 +8,7 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	// if (mlx_is_key_down(mlx, MLX_KEY_K))
-	// 	zoom_in()
+	// 	zoom_in();
 	// if (mlx_is_key_down(mlx, MLX_KEY_L))
 	// 	ft_putendl("Right arrow key is pressed");
 }
@@ -44,12 +44,13 @@ int	main(int argc, char **argv)
 	map = parse_map(argv[1]);
 	if (!map)
 		ft_error("Map failed");
-
+	// print_map(map);
 	draw_iso_map(map, img);
 	
 	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
 		ft_error(mlx_strerror(mlx_errno));
 	
+	ft_printf("Press ESC to exit\n");
 	mlx_resize_hook(mlx, resize_callback, map);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 

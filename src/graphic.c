@@ -7,6 +7,34 @@ void	safe_put_pixel(mlx_image_t *img, int x, int y, int color)
 	mlx_put_pixel(img, x, y, color);
 }
 
+/**
+ * @brief Draws a line between two isometric points, Bresenham's line algorithm
+ * @param img The image
+ * @param line The line parameters
+*/
+static void	bresenham_line_loop(mlx_image_t *img, t_map *map, t_line_params *line)
+{
+	int	e2;
+
+	while (1)
+	{
+		safe_put_pixel(img, line->p1->x, line->p1->y, calc_color(map, line));
+		if (line->p1->x == line->p2->x && line->p1->y == line->p2->y)
+			break ;
+		e2 = 2 * line->err;
+		if (e2 >= line->dy)
+		{
+			line->err += line->dy;
+			line->p1->x += line->sx;
+		}
+		if (e2 <= line->dx)
+		{
+			line->err += line->dx;
+			line->p1->y += line->sy;
+		}
+	}
+}
+
 void	draw_line(t_map *map, mlx_image_t *img, t_point_iso p1, t_point_iso p2)
 {
 	t_line_params	line;
@@ -23,5 +51,7 @@ void	draw_line(t_map *map, mlx_image_t *img, t_point_iso p1, t_point_iso p2)
 	else
 		line.sy = -1;
 	line.err = line.dx + line.dy;
-	bresenham_line_loop(img, p1, p2, line);
+	line.p1 = &p1;
+	line.p2 = &p2;
+	bresenham_line_loop(img, map, &line);
 }

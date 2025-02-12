@@ -24,19 +24,12 @@
 #  define IMAGE_HEIGHT 1080
 # endif
 
-// Offsets for centering the isometric projection
-# define X_OFFSET (WINDOW_WIDTH / 2)
-# define Y_OFFSET (WINDOW_HEIGHT / 4)
-
-// # define X_OFFSET 0
-// # define Y_OFFSET 0
-
 # define TITLE "FdF"
 # define TRUE 1
 # define FALSE 0
 
 # ifndef DEFAULT_COLOR
-#  define DEFAULT_COLOR 0xFFFFFFF
+#  define DEFAULT_COLOR 0x00FFFF
 # endif
 
 /**
@@ -56,6 +49,7 @@ typedef struct s_point_iso
 {
 	int	x;
 	int	y;
+	int	z_val;
 	int	color;
 }	t_point_iso;
 
@@ -64,6 +58,8 @@ typedef struct s_point_iso
 */
 typedef struct s_map
 {
+	int		min_z;
+	int		max_z;
 	int		window_width;
 	int		window_height;
 	int		width_x_axis;
@@ -76,11 +72,13 @@ typedef struct s_map
 */
 typedef struct s_line_params
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
+	int			dx;
+	int			dy;
+	int			sx;
+	int			sy;
+	int			err;
+	t_point_iso	*p1;
+	t_point_iso	*p2;
 }	t_line_params;
 
 /**
@@ -140,20 +138,17 @@ void	safe_put_pixel(mlx_image_t *img, int x, int y, int color);
 void	draw_line(t_map *map, mlx_image_t *img, t_point_iso p1, t_point_iso p2);
 
 /**
- * @brief Draws a line between two isometric points, Bresenham's line algorithm
- * @param img The image
- * @param p1 The first point
- * @param p2 The second point
- * @param params The line parameters
-*/
-void	bresenham_line_loop(mlx_image_t *img, t_point_iso p1,
-			t_point_iso p2, t_line_params params);
-
-/**
- * @brief Adds an offset to the isometric points
+ * @brief Adds an offset to the isometric points - centering the drawing
  * @param p1 The first point
  * @param p2 The second point
 */
 void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map);
+
+/**
+ * @brief Calculates the color of the line using the z values as gradient
+ * @param map The map
+ * @param line The line parameters
+*/
+int	calc_color(t_map *map, t_line_params *line);
 
 #endif

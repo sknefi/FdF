@@ -66,6 +66,33 @@ static int	fill_matrix(t_map *map, char *filename)
 	return (1);
 }
 
+/**
+ * @brief Finds the minimum and maximum values in the matrix (on the z axis)
+ * @param map The map structure
+*/
+static void	find_min_max_in_matrix(t_map *map)
+{
+	int		i;
+	int		j;
+
+	map->min_z = map->matrix[0][0].z;
+	map->max_z = map->matrix[0][0].z;
+	i = 0;
+	while (i < map->height_y_axis)
+	{
+		j = 0;
+		while (j < map->width_x_axis)
+		{
+			if (map->matrix[i][j].z < map->min_z)
+				map->min_z = map->matrix[i][j].z;
+			if (map->matrix[i][j].z > map->max_z)
+				map->max_z = map->matrix[i][j].z;
+			j++;
+		}
+		i++;
+	}
+}
+
 t_map	*parse_map(char *filename)
 {
 	int		nl_count;
@@ -86,6 +113,7 @@ t_map	*parse_map(char *filename)
 		return (free(map), NULL); // error
 	if (fill_matrix(map, filename) < 0)
 		return (free(map->matrix), free(map), NULL); // error
+	find_min_max_in_matrix(map);
 	return (map);
 }
 

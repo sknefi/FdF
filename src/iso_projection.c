@@ -15,6 +15,7 @@ static t_point_iso	project_pt_to_iso(t_point pt)
 	// Compute basic isometric coordinates
 	pt_iso.x = (int)(((pt.x - pt.y) * cos(angle)) * scale);
 	pt_iso.y = (int)((((pt.x + pt.y) * sin(angle)) - pt.z) * scale);
+	pt_iso.z_val = pt.z;
 	pt_iso.color = DEFAULT_COLOR;
 	return (pt_iso);
 }
