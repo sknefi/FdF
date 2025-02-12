@@ -20,6 +20,12 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
     return (r << 24 | g << 16 | b << 8 | a);
 }
 
+void resize_callback(int32_t width, int32_t height, void *param)
+{
+	(void)param;
+    ft_printf("Window resized: %d x %d\n", width, height);
+}
+
 void ft_randomize(void* param)
 {
 	(void)param;
@@ -79,6 +85,7 @@ int32_t main(void)
 		return(EXIT_FAILURE);
 	}
 	
+	mlx_resize_hook(mlx, resize_callback, mlx);
 	mlx_loop_hook(mlx, ft_randomize, mlx);
 	mlx_loop_hook(mlx, ft_hook, mlx);
 

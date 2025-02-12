@@ -79,6 +79,8 @@ t_map	*parse_map(char *filename)
 		return (NULL); // error
 	map->width_x_axis = 0;
 	map->height_y_axis = nl_count;
+	map->window_width = WIDTH;
+	map->window_height = HEIGHT;
 	map->matrix = (t_point **)malloc(sizeof(t_point *) * nl_count);
 	if (!map->matrix)
 		return (free(map), NULL); // error
@@ -93,8 +95,13 @@ void	print_map(t_map *map)
 	int		j;
 
 	i = 0;
+	ft_printf("---------\n");
+	ft_printf("Map:\n");
+	ft_printf("window_width: %d\n", map->window_width);
+	ft_printf("window_height: %d\n", map->window_height);
 	ft_printf("width_x_axis: %d\n", map->width_x_axis);
 	ft_printf("height_y_axis: %d\n", map->height_y_axis);
+	ft_printf("---------\n");
 	while (i < map->height_y_axis)
 	{
 		j = 0;

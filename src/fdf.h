@@ -9,16 +9,19 @@
 # include "../libft_divinus/libft.h"
 
 # ifndef WIDTH
-#  define WIDTH 1600
+#  define WIDTH 1920
 # endif
 
 # ifndef HEIGHT
-#  define HEIGHT 1600
+#  define HEIGHT 1080
 # endif
 
 // Offsets for centering the isometric projection
-# define X_OFFSET (WIDTH / 3)
-# define Y_OFFSET (HEIGHT / 5)
+# define X_OFFSET (WIDTH / 2)
+# define Y_OFFSET (HEIGHT / 4)
+
+// # define X_OFFSET 0
+// # define Y_OFFSET 0
 
 # define TITLE "FdF"
 # define TRUE 1
@@ -53,6 +56,8 @@ typedef struct s_point_iso
 */
 typedef struct s_map
 {
+	int		window_width;
+	int		window_height;
 	int		width_x_axis;
 	int		height_y_axis;
 	t_point	**matrix;
@@ -124,7 +129,7 @@ void	safe_put_pixel(mlx_image_t *img, int x, int y, int color);
  * @param p2 The second point
  * @param color The color
 */
-void	draw_line(mlx_image_t *img, t_point_iso p1, t_point_iso p2);
+void	draw_line(t_map *map, mlx_image_t *img, t_point_iso p1, t_point_iso p2);
 
 /**
  * @brief Draws a line between two isometric points, Bresenham's line algorithm
@@ -141,6 +146,6 @@ void	bresenham_line_loop(mlx_image_t *img, t_point_iso p1,
  * @param p1 The first point
  * @param p2 The second point
 */
-void	apply_offset(t_point_iso *p1, t_point_iso *p2);
+void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map);
 
 #endif

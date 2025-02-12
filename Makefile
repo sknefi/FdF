@@ -58,4 +58,6 @@ libft:
 
 re: fclean all
 
+e: all clean
+
 .PHONY: all clean fclean re

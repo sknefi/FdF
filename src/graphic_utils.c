@@ -1,11 +1,16 @@
 #include "fdf.h"
 
-void	apply_offset(t_point_iso *p1, t_point_iso *p2)
+void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map)
 {
+	(void)map;
 	p1->x += X_OFFSET;
 	p1->y += Y_OFFSET;
 	p2->x += X_OFFSET;
 	p2->y += Y_OFFSET;
+	// p1->x += map->window_width / 2;
+	// p1->y += map->window_height / 4;
+	// p2->x += map->window_width / 2;
+	// p2->y += map->window_height / 4;
 }
 
 void	bresenham_line_loop(mlx_image_t *img, t_point_iso p1,

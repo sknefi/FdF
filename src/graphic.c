@@ -7,11 +7,11 @@ void	safe_put_pixel(mlx_image_t *img, int x, int y, int color)
 	mlx_put_pixel(img, x, y, color);
 }
 
-void	draw_line(mlx_image_t *img, t_point_iso p1, t_point_iso p2)
+void	draw_line(t_map *map, mlx_image_t *img, t_point_iso p1, t_point_iso p2)
 {
 	t_line_params	line;
 
-	apply_offset(&p1, &p2);
+	apply_offset(&p1, &p2, map);
 	line.dx = abs(p2.x - p1.x);
 	if (p1.x < p2.x)
 		line.sx = 1;
