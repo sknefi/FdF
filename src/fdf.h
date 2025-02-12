@@ -8,17 +8,25 @@
 # include <fcntl.h>
 # include "../libft_divinus/libft.h"
 
-# ifndef WIDTH
-#  define WIDTH 1920
+# ifndef WINDOW_WIDTH
+#  define WINDOW_WIDTH 800
 # endif
 
-# ifndef HEIGHT
-#  define HEIGHT 1080
+# ifndef WINDOW_HEIGHT
+#  define WINDOW_HEIGHT 600
+# endif
+
+# ifndef IMAGE_WIDTH
+#  define IMAGE_WIDTH 1920
+# endif
+
+# ifndef IMAGE_HEIGHT
+#  define IMAGE_HEIGHT 1080
 # endif
 
 // Offsets for centering the isometric projection
-# define X_OFFSET (WIDTH / 2)
-# define Y_OFFSET (HEIGHT / 4)
+# define X_OFFSET (WINDOW_WIDTH / 2)
+# define Y_OFFSET (WINDOW_HEIGHT / 4)
 
 // # define X_OFFSET 0
 // # define Y_OFFSET 0

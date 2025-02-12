@@ -2,15 +2,15 @@
 
 void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map)
 {
-	(void)map;
-	p1->x += X_OFFSET;
-	p1->y += Y_OFFSET;
-	p2->x += X_OFFSET;
-	p2->y += Y_OFFSET;
-	// p1->x += map->window_width / 2;
-	// p1->y += map->window_height / 4;
-	// p2->x += map->window_width / 2;
-	// p2->y += map->window_height / 4;
+	int		offset_x;
+	int		offset_y;
+
+	offset_x = (IMAGE_WIDTH - map->window_width) / 3;
+	offset_y = (IMAGE_HEIGHT - map->window_height) / 2;
+	p1->x += offset_x;
+	p1->y += offset_y;
+	p2->x += offset_x;
+	p2->y += offset_y;
 }
 
 void	bresenham_line_loop(mlx_image_t *img, t_point_iso p1,

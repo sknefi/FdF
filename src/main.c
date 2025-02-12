@@ -33,11 +33,11 @@ int	main(int argc, char **argv)
 	if (argc != 2 || !is_filename_valid(argv[1]))
 		return (ft_error("Usage - ./fdf <filename>.fdf"), EXIT_FAILURE);
 
-	mlx = mlx_init(WIDTH, HEIGHT, "FdF", TRUE);
+	mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "FdF", TRUE);
 	if (!mlx)
 		ft_error(mlx_strerror(mlx_errno));
 
-	img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	img = mlx_new_image(mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
 	if (!img)
 		ft_error(mlx_strerror(mlx_errno));
 

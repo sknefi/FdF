@@ -2,7 +2,7 @@
 
 void	safe_put_pixel(mlx_image_t *img, int x, int y, int color)
 {
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+	if (x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT)
 		return ;
 	mlx_put_pixel(img, x, y, color);
 }
