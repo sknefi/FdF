@@ -41,8 +41,8 @@ static int	fill_matrix(t_map *map, char *filename)
 	char	**split_line;
 
 	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (-1); // error
+	if (fd < 0)
+		return (-1);
 	curr_y_index = 0;
 	while (TRUE)
 	{
@@ -52,14 +52,14 @@ static int	fill_matrix(t_map *map, char *filename)
 		split_line = ft_split(line, ' ');
 		free(line);
 		if (!split_line)
-			return (close(fd), -1); // error
+			return (close(fd), -1);
 		numbers_count = ft_split_len(split_line);
-		if (map->width_x_axis == 0) // tu to teoreticky moze failnut
+		if (map->width_x_axis == 0)
 			map->width_x_axis = numbers_count;
 		else if (map->width_x_axis != numbers_count)
-			return (free_split(split_line), close(fd), -1); // error
+			return (free_split(split_line), close(fd), -1);
 		if (insert_points(map, split_line, curr_y_index) < 0)
-			return (close(fd), -1); // error
+			return (close(fd), -1);
 		curr_y_index++;
 	}
 	close(fd);
@@ -100,19 +100,19 @@ t_map	*parse_map(char *filename)
 
 	nl_count = new_line_count(filename);
 	if (nl_count == -1 || nl_count == 0)
-		return (NULL); // error or empty file
+		return (NULL);
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
-		return (NULL); // error
+		return (NULL);
 	map->width_x_axis = 0;
 	map->height_y_axis = nl_count;
 	map->window_width = WINDOW_WIDTH;
 	map->window_height = WINDOW_HEIGHT;
 	map->matrix = (t_point **)malloc(sizeof(t_point *) * nl_count);
 	if (!map->matrix)
-		return (free(map), NULL); // error
+		return (free(map), NULL);
 	if (fill_matrix(map, filename) < 0)
-		return (free(map->matrix), free(map), NULL); // error
+		return (free(map->matrix), free(map), NULL);
 	find_min_max_in_matrix(map);
 	return (map);
 }

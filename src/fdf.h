@@ -172,4 +172,6 @@ void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map);
 */
 int	calc_color(t_map *map, t_line_params *line);
 
+void	cleanup(t_map *map, mlx_t *mlx, mlx_image_t *img);
+
 #endif

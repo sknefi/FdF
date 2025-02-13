@@ -33,10 +33,8 @@ void	draw_iso_map(t_map *map, mlx_image_t *img)
 		while (j < map->width_x_axis)
 		{
 			p1 = project_pt_to_iso(map->matrix[i][j]);
-			// If there is a point to the right, draw a line to it.
 			if (j + 1 < map->width_x_axis)
 				draw_line(map, img, p1, project_pt_to_iso(map->matrix[i][j + 1]));
-			// If there is a point below, draw a line to it.
 			if (i + 1 < map->height_y_axis)
 				draw_line(map, img, p1, project_pt_to_iso(map->matrix[i + 1][j]));
 			j++;
