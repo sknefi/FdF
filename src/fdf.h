@@ -32,6 +32,14 @@
 #  define DEFAULT_COLOR 0x00FFFF
 # endif
 
+# ifndef START_COLOR
+#  define START_COLOR 0x9d00ffff
+# endif
+
+# ifndef END_COLOR
+#  define END_COLOR 0x40F2FFFF
+# endif
+
 /**
  * @brief A structure to hold a 3D point
 */
@@ -80,6 +88,17 @@ typedef struct s_line_params
 	t_point_iso	*p1;
 	t_point_iso	*p2;
 }	t_line_params;
+
+/**
+ * @brief A structure to hold the rgba values
+*/
+typedef struct s_rgba
+{
+	int	r;
+	int	g;
+	int	b;
+	int	a;
+}	t_rgba;
 
 /**
  * @brief Counts the number of new lines in the file
@@ -145,7 +164,9 @@ void	draw_line(t_map *map, mlx_image_t *img, t_point_iso p1, t_point_iso p2);
 void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map);
 
 /**
- * @brief Calculates the color of the line using the z values as gradient
+ * @brief Calculates the color of the line using the z values as gradient,
+ * interpolating between the start and end colors, floating point percentage 
+ * could be out of bounds [0, 1], so we need to check it and round it
  * @param map The map
  * @param line The line parameters
 */

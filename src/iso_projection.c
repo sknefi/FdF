@@ -11,7 +11,7 @@ static t_point_iso	project_pt_to_iso(t_point pt)
 	t_point_iso	pt_iso;
 
 	angle = 30 * (M_PI / 180.0);  // 30° in radians
-	scale = 20.0;  // Increase this value to scale up the projection
+	scale = 15.0;  // Increase this value to scale up the projection
 	// Compute basic isometric coordinates
 	pt_iso.x = (int)(((pt.x - pt.y) * cos(angle)) * scale);
 	pt_iso.y = (int)((((pt.x + pt.y) * sin(angle)) - pt.z) * scale);
