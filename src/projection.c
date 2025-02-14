@@ -64,6 +64,6 @@ static t_point_pr	project_pt_to_parallel(t_point *pt, t_transform *tr)
 t_point_pr	project_pt(t_point *pt, t_transform *tr)
 {
 	if (tr->projection == ISOMETRIC)
-		return (project_pt_to_iso(pt, tr));	
+		return (project_pt_to_iso(pt, tr));
 	return (project_pt_to_parallel(pt, tr));
 }

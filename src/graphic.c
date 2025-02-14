@@ -20,7 +20,8 @@ static void	safe_put_pixel(mlx_image_t *img, int x, int y, int color)
  * @param img The image
  * @param line The line parameters
 */
-static void	bresenham_line_loop(mlx_image_t *img, t_map *map, t_line_params *line)
+static void	bresenham_line_loop(mlx_image_t *img,
+	t_map *map, t_line_params *line)
 {
 	int	e2;
 

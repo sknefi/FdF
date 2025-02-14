@@ -44,8 +44,7 @@ static int	interpolate_color(int start, int end, float t)
 	e.g = (end >> 16) & 0xFF;
 	e.b = (end >> 8) & 0xFF;
 	e.a = end & 0xFF;
-	return (ft_pixel(
-		s.r + (int)((e.r - s.r) * t),
+	return (ft_pixel(s.r + (int)((e.r - s.r) * t),
 		s.g + (int)((e.g - s.g) * t),
 		s.b + (int)((e.b - s.b) * t),
 		s.a + (int)((e.a - s.a) * t)
@@ -60,7 +59,7 @@ int	calc_color(t_map *map, t_line_params *line)
 	float	percent;
 
 	start_color = START_COLOR;
-	end_color   = END_COLOR;
+	end_color = END_COLOR;
 	z_avg = (line->p1->z_val + line->p2->z_val) / 2;
 	percent = (float)(z_avg - map->min_z) / (map->max_z - map->min_z);
 	if (percent < 0)

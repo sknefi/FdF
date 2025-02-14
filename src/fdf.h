@@ -196,8 +196,8 @@ void	draw_pr_map(t_app *app);
 void	draw_line(t_map *map, mlx_image_t *img, t_point_pr p1, t_point_pr p2);
 
 /**
- * @brief Adds an offset to the isometric points - centering the drawing on the screen
- * (mainly for first time drawing)
+ * @brief Adds an offset to the isometric points - centering the drawing 
+ * on the screen (mainly for first time drawing)
  * @param p1 The first point
  * @param p2 The second point
 */
@@ -211,7 +211,6 @@ void	apply_offset(t_point_pr *p1, t_point_pr *p2, t_map *map);
  * @param line The line parameters
 */
 int		calc_color(t_map *map, t_line_params *line);
-
 
 /**
  * @brief Frees every malloc in the app structure (map, transform, img, mlx)
