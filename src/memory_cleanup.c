@@ -20,3 +20,11 @@ void	cleanup(t_map *map, mlx_t *mlx, mlx_image_t *img)
 	mlx_terminate(mlx);
 	free_map(map);
 }
+
+void	clean_app(t_app *app)
+{
+	mlx_delete_image(app->mlx, app->img);
+	mlx_terminate(app->mlx);
+	free_map(app->map);
+	free(app->transform);
+}

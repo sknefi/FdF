@@ -5,6 +5,9 @@ NAME        = fdf
 
 # Source Files
 SRCS        = 	\
+				src/matrix/translate.c \
+				src/matrix/zoom.c \
+				src/app.c \
 				src/utils.c \
 				src/map.c \
 				src/memory_cleanup.c \

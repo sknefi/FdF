@@ -95,8 +95,8 @@ static void	find_min_max_in_matrix(t_map *map)
 
 t_map	*parse_map(char *filename)
 {
-	int		nl_count;
-	t_map	*map;
+	int			nl_count;
+	t_map		*map;
 
 	nl_count = new_line_count(filename);
 	if (nl_count == -1 || nl_count == 0)

@@ -101,6 +101,29 @@ typedef struct s_rgba
 }	t_rgba;
 
 /**
+ * @brief A structure to hold the transformation values
+ * zoom, rotation, translation
+*/
+typedef struct s_transform
+{
+	int		translation_x;
+	int		translation_y;
+	float	zoom;
+	float	rotation;
+}	t_transform;
+
+/**
+ * @brief A structure to hold the FdF application
+*/
+typedef struct s_app
+{
+	t_map		*map;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_transform	*transform;
+}	t_app;
+
+/**
  * @brief Counts the number of new lines in the file
  * @param filename The filename
 */
@@ -132,10 +155,9 @@ int		is_filename_valid(char *filename);
 
 /**
  * @brief Draws the isometric projection of the map
- * @param map The map
- * @param img The image to draw on
+ * @param app The application structure
 */
-void	draw_iso_map(t_map *map, mlx_image_t *img);
+void	draw_iso_map(t_app *app);
 
 /**
  * @brief Safely put a pixel on the image, 
@@ -173,5 +195,21 @@ void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map);
 int	calc_color(t_map *map, t_line_params *line);
 
 void	cleanup(t_map *map, mlx_t *mlx, mlx_image_t *img);
+
+void	clean_app(t_app *app);
+
+int		update_app(t_app *app, char *filename);
+
+void	zoom_in(t_app *app);
+
+void	zoom_out(t_app *app);
+
+void	translate_x_left(t_app *app);
+
+void	translate_x_right(t_app *app);
+
+void	translate_y_up(t_app *app);
+
+void	translate_y_down(t_app *app);
 
 #endif
