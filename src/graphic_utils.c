@@ -13,7 +13,14 @@ void	apply_offset(t_point_pr *p1, t_point_pr *p2, t_map *map)
 	p2->y += offset_y;
 }
 
-int	ft_pixel(int r, int g, int b, int a)
+/**
+ * @brief Puts bytes in the right order for the pixel
+ * @param r The red byte
+ * @param g The green byte
+ * @param b The blue byte
+ * @param a The alpha byte
+*/
+static int	ft_pixel(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
@@ -60,5 +67,5 @@ int	calc_color(t_map *map, t_line_params *line)
 		percent = 0;
 	if (percent > 1)
 		percent = 1;
-	return interpolate_color(start_color, end_color, percent);
+	return (interpolate_color(start_color, end_color, percent));
 }

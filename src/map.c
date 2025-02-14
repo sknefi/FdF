@@ -28,7 +28,7 @@ static int	insert_points(t_map *map, char **split_line, int curr_y_index)
 }
 
 /**
- * @brief Fills the matrix with the values from the file.
+ * @brief Fills the matrix with the values from the file
  * @param map The map structure
  * @param filename The filename
 */
@@ -117,7 +117,7 @@ t_map	*parse_map(char *filename)
 	return (map);
 }
 
-void	draw_iso_map(t_app *app)
+void	draw_pr_map(t_app *app)
 {
 	int			i;
 	int			j;

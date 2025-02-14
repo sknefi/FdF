@@ -8,6 +8,11 @@
 # include <fcntl.h>
 # include "../libft_divinus/libft.h"
 
+// pr - projected
+// pt - point
+// iso - isometric
+// par - parallel
+
 # ifndef WINDOW_WIDTH
 #  define WINDOW_WIDTH 800
 # endif
@@ -48,19 +53,6 @@
 #  define ROTATION_FACTOR 0.1
 # endif
 
-# ifndef RF_X
-#  define RF_X 1
-# endif
-
-# ifndef RF_Y
-#  define RF_Y 0.1
-# endif
-
-# ifndef RF_Z
-#  define RF_Z 0.1
-# endif
-
-
 /**
  * @brief A structure to hold type of projection
  * @param ISOMETRIC Isometric projection
@@ -83,7 +75,8 @@ typedef struct s_point
 }	t_point;
 
 /**
- * @brief A structure to hold a 2D point in isometric coordinates
+ * @brief A structure to hold a 2D point in projected coordinates
+ * @param z_val The z value of the point
 */
 typedef struct s_point_iso
 {
@@ -133,7 +126,7 @@ typedef struct s_line_params
 }	t_line_params;
 
 /**
- * @brief A structure to hold the rgba values
+ * @brief A structure to hold the rgba values in bytes for a color
 */
 typedef struct s_rgba
 {
@@ -145,7 +138,7 @@ typedef struct s_rgba
 
 /**
  * @brief A structure to hold the transformation values
- * zoom, rotation, translation
+ * zoom, rotation, translation and type of projection
 */
 typedef struct s_transform
 {
@@ -153,14 +146,12 @@ typedef struct s_transform
 	int					translation_y;
 	float				zoom;
 	float				rotation;
-	double 				rotation_x;
-	double 				rotation_y;
-	double 				rotation_z;
 	t_projection_type	projection;
 }	t_transform;
 
 /**
- * @brief A structure to hold the FdF application
+ * @brief A structure to hold the FdF application, 
+ * easier to pass around and clean up
 */
 typedef struct s_app
 {
@@ -183,18 +174,6 @@ int		new_line_count(char *filename);
 t_map	*parse_map(char *filename);
 
 /**
- * @brief Prints the map
- * @param map The map structure
-*/
-void	print_map(t_map *map);
-
-/**
- * @brief Frees the whole map
- * @param map The map structure
-*/
-void	free_map(t_map *map);
-
-/**
  * @brief Checks if the filename is valid
  * @param filename The filename
 */
@@ -204,20 +183,11 @@ int		is_filename_valid(char *filename);
  * @brief Draws the isometric projection of the map
  * @param app The application structure
 */
-void	draw_iso_map(t_app *app);
-
-/**
- * @brief Safely put a pixel on the image, 
- * checking if the coordinates are within bounds
- * @param img The image
- * @param x The x coordinate
- * @param y The y coordinate
- * @param color The color
-*/
-void	safe_put_pixel(mlx_image_t *img, int x, int y, int color);
+void	draw_pr_map(t_app *app);
 
 /**
  * @brief Draws a line between two isometric points, Bresenham's line algorithm
+ * with error correction
  * @param img The image
  * @param p1 The first point
  * @param p2 The second point
@@ -226,7 +196,8 @@ void	safe_put_pixel(mlx_image_t *img, int x, int y, int color);
 void	draw_line(t_map *map, mlx_image_t *img, t_point_pr p1, t_point_pr p2);
 
 /**
- * @brief Adds an offset to the isometric points - centering the drawing
+ * @brief Adds an offset to the isometric points - centering the drawing on the screen
+ * (mainly for first time drawing)
  * @param p1 The first point
  * @param p2 The second point
 */
@@ -235,41 +206,86 @@ void	apply_offset(t_point_pr *p1, t_point_pr *p2, t_map *map);
 /**
  * @brief Calculates the color of the line using the z values as gradient,
  * interpolating between the start and end colors, floating point percentage 
- * could be out of bounds [0, 1], so we need to check it and round it
+ * could be out of bounds [0, 1], so we need to check it and round it 
  * @param map The map
  * @param line The line parameters
 */
-int	calc_color(t_map *map, t_line_params *line);
+int		calc_color(t_map *map, t_line_params *line);
 
-void	cleanup(t_map *map, mlx_t *mlx, mlx_image_t *img);
 
+/**
+ * @brief Frees every malloc in the app structure (map, transform, img, mlx)
+ * basically everything
+ * @param app The application structure
+*/
 void	clean_app(t_app *app);
 
+/**
+ * @brief Parses the map and initializes the transform structure
+ * @param app The application structure
+ * @param filename The filename, needed for matrix in the map structure
+*/
 int		update_app(t_app *app, char *filename);
 
+/**
+ * @brief Zoom in the map by a constant factor,
+ * works for isometric and parallel projection 
+*/
 void	zoom_in(t_app *app);
 
+/**
+ * @brief Zoom out the map by a constant factor,
+ * works for isometric and parallel projection 
+*/
 void	zoom_out(t_app *app);
 
+/**
+ * @brief Translate the map to the left by a constant factor,
+ * works for isometric and parallel projection 
+*/
 void	translate_x_left(t_app *app);
 
+/**
+ * @brief Translate the map to the right by a constant factor,
+ * works for isometric and parallel projection 
+*/
 void	translate_x_right(t_app *app);
 
+/**
+ * @brief Translate the map up by a constant factor,
+ * works for isometric and parallel projection 
+*/
 void	translate_y_up(t_app *app);
 
+/**
+ * @brief Translate the map down by a constant factor,
+ * works for isometric and parallel projection 
+*/
 void	translate_y_down(t_app *app);
 
+/**
+ * @brief Rotate the map to the left by a constant factor,
+ * works for isometric projection 
+*/
 void	rotate_2d_left(t_app *app);
 
+/**
+ * @brief Rotate the map to the right by a constant factor,
+ * works for isometric projection 
+*/
 void	rotate_2d_right(t_app *app);
 
-void	rotate_3d_x_right(t_app *app);
-
-void	rotate_3d_x_left(t_app *app);
-
+/**
+ * @brief Change the projection of the map, between isometric and parallel
+ * @param app The application structure
+ * @param projection The projection type
+*/
 void	change_projection(t_app *app, t_projection_type projection);
 
+/**
+ * @brief Projects point to isometric or parallel projection, based on 
+ * the transform structure
+*/
 t_point_pr	project_pt(t_point *pt, t_transform *tr);
-
 
 #endif

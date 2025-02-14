@@ -52,13 +52,13 @@ static t_point_pr	project_pt_to_iso(t_point *pt, t_transform *tr)
 
 static t_point_pr	project_pt_to_parallel(t_point *pt, t_transform *tr)
 {
-	t_point_pr	pt_iso;
+	t_point_pr	pt_par;
 
-	pt_iso.x = (int)(pt->x * tr->zoom);
-	pt_iso.y = (int)(pt->y * tr->zoom);
-	add_translation(&pt_iso, tr);
-	pt_iso.z_val = pt->z;
-	return (pt_iso);
+	pt_par.x = (int)(pt->x * tr->zoom);
+	pt_par.y = (int)(pt->y * tr->zoom);
+	add_translation(&pt_par, tr);
+	pt_par.z_val = pt->z;
+	return (pt_par);
 }
 
 t_point_pr	project_pt(t_point *pt, t_transform *tr)

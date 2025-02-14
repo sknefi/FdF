@@ -1,6 +1,14 @@
 #include "fdf.h"
 
-void	safe_put_pixel(mlx_image_t *img, int x, int y, int color)
+/**
+ * @brief Safely put a pixel on the image, 
+ * checking if the coordinates are within bounds
+ * @param img The image
+ * @param x The x coordinate
+ * @param y The y coordinate
+ * @param color The color
+*/
+static void	safe_put_pixel(mlx_image_t *img, int x, int y, int color)
 {
 	if (x < 0 || x >= IMAGE_WIDTH || y < 0 || y >= IMAGE_HEIGHT)
 		return ;
