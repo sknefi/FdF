@@ -117,28 +117,27 @@ t_map	*parse_map(char *filename)
 	return (map);
 }
 
-void	print_map(t_map *map)
+void	draw_iso_map(t_app *app)
 {
-	int		i;
-	int		j;
+	int			i;
+	int			j;
+	t_point_pr	p1;
 
 	i = 0;
-	ft_printf("---------\n");
-	ft_printf("Map:\n");
-	ft_printf("window_width: %d\n", map->window_width);
-	ft_printf("window_height: %d\n", map->window_height);
-	ft_printf("width_x_axis: %d\n", map->width_x_axis);
-	ft_printf("height_y_axis: %d\n", map->height_y_axis);
-	ft_printf("---------\n");
-	while (i < map->height_y_axis)
+	while (i < app->map->height_y_axis)
 	{
 		j = 0;
-		while (j < map->width_x_axis)
+		while (j < app->map->width_x_axis)
 		{
-			ft_printf("%d ", map->matrix[i][j].z);
+			p1 = project_pt(&app->map->matrix[i][j], app->transform);
+			if (j + 1 < app->map->width_x_axis)
+				draw_line(app->map, app->img, p1,
+					project_pt(&app->map->matrix[i][j + 1], app->transform));
+			if (i + 1 < app->map->height_y_axis)
+				draw_line(app->map, app->img, p1,
+					project_pt(&app->map->matrix[i + 1][j], app->transform));
 			j++;
 		}
-		ft_printf("\n");
 		i++;
 	}
 }

@@ -23,11 +23,10 @@ void	ft_hook(void *param)
 		rotate_2d_left(app);
 	if (mlx_is_key_down(app->mlx, MLX_KEY_E))
 		rotate_2d_right(app);
-	// if (mlx_is_key_down(app->mlx, MLX_KEY_I))
-	// 	rotate_3d_x_left(app);
-	// if (mlx_is_key_down(app->mlx, MLX_KEY_J))
-	// 	rotate_3d_x_right(app);
-	
+	if (mlx_is_key_down(app->mlx, MLX_KEY_B))
+		change_projection(app, ISOMETRIC);
+	if (mlx_is_key_down(app->mlx, MLX_KEY_N))
+		change_projection(app, PARALLEL);
 }
 
 int	main(int argc, char **argv)

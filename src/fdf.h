@@ -65,13 +65,11 @@
  * @brief A structure to hold type of projection
  * @param ISOMETRIC Isometric projection
  * @param PARALLEL Parallel/Ortographic projection
- * @param PERSPECTIVE Perspective/Conic projection
 */
 typedef enum e_projection_type
 {
 	ISOMETRIC,
-	PARALLEL,
-	PERSPECTIVE
+	PARALLEL
 }	t_projection_type;
 
 /**
@@ -92,7 +90,7 @@ typedef struct s_point_iso
 	int	x;
 	int	y;
 	int	z_val;
-}	t_point_iso;
+}	t_point_pr;
 
 /**
  * @brief A structure to hold the values of the isometric points, 
@@ -130,8 +128,8 @@ typedef struct s_line_params
 	int			sx;
 	int			sy;
 	int			err;
-	t_point_iso	*p1;
-	t_point_iso	*p2;
+	t_point_pr	*p1;
+	t_point_pr	*p2;
 }	t_line_params;
 
 /**
@@ -225,14 +223,14 @@ void	safe_put_pixel(mlx_image_t *img, int x, int y, int color);
  * @param p2 The second point
  * @param color The color
 */
-void	draw_line(t_map *map, mlx_image_t *img, t_point_iso p1, t_point_iso p2);
+void	draw_line(t_map *map, mlx_image_t *img, t_point_pr p1, t_point_pr p2);
 
 /**
  * @brief Adds an offset to the isometric points - centering the drawing
  * @param p1 The first point
  * @param p2 The second point
 */
-void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map);
+void	apply_offset(t_point_pr *p1, t_point_pr *p2, t_map *map);
 
 /**
  * @brief Calculates the color of the line using the z values as gradient,
@@ -266,5 +264,12 @@ void	rotate_2d_left(t_app *app);
 void	rotate_2d_right(t_app *app);
 
 void	rotate_3d_x_right(t_app *app);
+
 void	rotate_3d_x_left(t_app *app);
+
+void	change_projection(t_app *app, t_projection_type projection);
+
+t_point_pr	project_pt(t_point *pt, t_transform *tr);
+
+
 #endif

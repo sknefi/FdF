@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void	apply_offset(t_point_iso *p1, t_point_iso *p2, t_map *map)
+void	apply_offset(t_point_pr *p1, t_point_pr *p2, t_map *map)
 {
 	int		offset_x;
 	int		offset_y;

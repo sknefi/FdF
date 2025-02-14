@@ -35,7 +35,7 @@ static void	bresenham_line_loop(mlx_image_t *img, t_map *map, t_line_params *lin
 	}
 }
 
-void	draw_line(t_map *map, mlx_image_t *img, t_point_iso p1, t_point_iso p2)
+void	draw_line(t_map *map, mlx_image_t *img, t_point_pr p1, t_point_pr p2)
 {
 	t_line_params	line;
 
