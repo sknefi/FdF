@@ -19,16 +19,15 @@ void	ft_hook(void *param)
 		translate_y_up(app);
 	if (mlx_is_key_down(app->mlx, MLX_KEY_S))
 		translate_y_down(app);
-}
-
-void	resize_callback(int32_t width, int32_t height, void *param)
-{
-	t_map		*map;
-
-	map = (t_map *)param;
-	map->window_width = width;
-	map->window_height = height;
-	ft_printf("Window resized: %d x %d\n", width, height);
+	if (mlx_is_key_down(app->mlx, MLX_KEY_Q))
+		rotate_2d_left(app);
+	if (mlx_is_key_down(app->mlx, MLX_KEY_E))
+		rotate_2d_right(app);
+	// if (mlx_is_key_down(app->mlx, MLX_KEY_I))
+	// 	rotate_3d_x_left(app);
+	// if (mlx_is_key_down(app->mlx, MLX_KEY_J))
+	// 	rotate_3d_x_right(app);
+	
 }
 
 int	main(int argc, char **argv)
@@ -44,11 +43,10 @@ int	main(int argc, char **argv)
 	if (!app.img)
 		ft_error(mlx_strerror(mlx_errno));
 	if (update_app(&app, argv[1]) < 0)
-		return (clean_app(&app),ft_error("Failed to update the app"), EXIT_FAILURE);
+		return (clean_app(&app), ft_error("Failed to update the app"), EXIT_FAILURE);
 	draw_iso_map(&app);
 	if (mlx_image_to_window(app.mlx, app.img, 0, 0) < 0)
 		ft_error(mlx_strerror(mlx_errno));
-	mlx_resize_hook(app.mlx, resize_callback, app.map);
 	mlx_loop_hook(app.mlx, ft_hook, &app);
 	mlx_loop(app.mlx);
 	clean_app(&app);

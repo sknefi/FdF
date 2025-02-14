@@ -7,6 +7,8 @@ NAME        = fdf
 SRCS        = 	\
 				src/matrix/translate.c \
 				src/matrix/zoom.c \
+				src/matrix/rotate_2d.c \
+				src/matrix/rotate_3d.c \
 				src/app.c \
 				src/utils.c \
 				src/map.c \

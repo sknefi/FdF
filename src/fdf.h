@@ -28,10 +28,6 @@
 # define TRUE 1
 # define FALSE 0
 
-# ifndef DEFAULT_COLOR
-#  define DEFAULT_COLOR 0x00FFFF
-# endif
-
 # ifndef START_COLOR
 #  define START_COLOR 0x9d00ffff
 # endif
@@ -39,6 +35,44 @@
 # ifndef END_COLOR
 #  define END_COLOR 0x40F2FFFF
 # endif
+
+# ifndef ZOOM_FACTOR
+#  define ZOOM_FACTOR 0.05
+# endif
+
+# ifndef TRANSLATION_FACTOR
+#  define TRANSLATION_FACTOR 3
+# endif
+
+# ifndef ROTATION_FACTOR
+#  define ROTATION_FACTOR 0.1
+# endif
+
+# ifndef RF_X
+#  define RF_X 1
+# endif
+
+# ifndef RF_Y
+#  define RF_Y 0.1
+# endif
+
+# ifndef RF_Z
+#  define RF_Z 0.1
+# endif
+
+
+/**
+ * @brief A structure to hold type of projection
+ * @param ISOMETRIC Isometric projection
+ * @param PARALLEL Parallel/Ortographic projection
+ * @param PERSPECTIVE Perspective/Conic projection
+*/
+typedef enum e_projection_type
+{
+	ISOMETRIC,
+	PARALLEL,
+	PERSPECTIVE
+}	t_projection_type;
 
 /**
  * @brief A structure to hold a 3D point
@@ -58,8 +92,19 @@ typedef struct s_point_iso
 	int	x;
 	int	y;
 	int	z_val;
-	int	color;
 }	t_point_iso;
+
+/**
+ * @brief A structure to hold the values of the isometric points, 
+ * this is mostly for norminette, for calculating the isometric points
+*/
+typedef struct s_pt_iso_vals
+{
+	int	x;
+	int	y;
+	int	rotated_x;
+	int	rotated_y;
+}	t_pt_iso_vals;
 
 /**
  * @brief A structure to hold the map
@@ -106,10 +151,14 @@ typedef struct s_rgba
 */
 typedef struct s_transform
 {
-	int		translation_x;
-	int		translation_y;
-	float	zoom;
-	float	rotation;
+	int					translation_x;
+	int					translation_y;
+	float				zoom;
+	float				rotation;
+	double 				rotation_x;
+	double 				rotation_y;
+	double 				rotation_z;
+	t_projection_type	projection;
 }	t_transform;
 
 /**
@@ -212,4 +261,10 @@ void	translate_y_up(t_app *app);
 
 void	translate_y_down(t_app *app);
 
+void	rotate_2d_left(t_app *app);
+
+void	rotate_2d_right(t_app *app);
+
+void	rotate_3d_x_right(t_app *app);
+void	rotate_3d_x_left(t_app *app);
 #endif

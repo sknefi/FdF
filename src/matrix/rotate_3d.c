@@ -1,8 +1,8 @@
 #include "../fdf.h"
 
-void	zoom_in(t_app *app)
+void	rotate_3d_x_left(t_app *app)
 {
-	app->transform->zoom += ZOOM_FACTOR;
+	app->transform->rotation_x += RF_X;
 	mlx_delete_image(app->mlx, app->img);
 	app->img = mlx_new_image(app->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
 	draw_iso_map(app);
@@ -10,9 +10,9 @@ void	zoom_in(t_app *app)
 		ft_error(mlx_strerror(mlx_errno));
 }
 
-void	zoom_out(t_app *app)
+void	rotate_3d_x_right(t_app *app)
 {
-	app->transform->zoom -= ZOOM_FACTOR;
+	app->transform->rotation_x -= RF_X;
 	mlx_delete_image(app->mlx, app->img);
 	app->img = mlx_new_image(app->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
 	draw_iso_map(app);

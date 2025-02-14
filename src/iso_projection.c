@@ -1,4 +1,65 @@
 #include "fdf.h"
+/**
+ * @brief Adds a translation to the isometric point
+ * @param pt The isometric point
+ * @param tr The transformation structure
+*/
+static void	add_translation(t_point_iso *pt, t_transform *tr)
+{
+	pt->x += tr->translation_x;
+	pt->y += tr->translation_y;
+}
+
+/**
+ * @brief Adds a rotation to the isometric point
+ * Rotation matrix in 2D:
+ * | cos(θ) -sin(θ) |
+ * | sin(θ)  cos(θ) |
+ * @param pt The isometric point
+ * @param tr The transformation structure
+*/
+static void	add_rotation(t_point_iso *pt, t_transform *tr)
+{
+	int	prev_x;
+	int	prev_y;
+
+	prev_x = pt->x;
+	prev_y = pt->y;
+	pt->x = prev_x * cos(tr->rotation) - prev_y * sin(tr->rotation);
+	pt->y = prev_x * sin(tr->rotation) + prev_y * cos(tr->rotation);
+}
+
+// Rotate a 3D point around the X, Y, and Z axes.
+static t_point_iso	rotate_3d(t_point_iso pt, t_transform *tr)
+{
+	double			rad_x;
+	double			rad_y;
+	double			rad_z;
+	t_point_iso		rotated;
+	t_point_iso		temp;
+
+	// Convert rotation angles from degrees to radians.
+	rad_x = tr->rotation_x * (M_PI / 180.0);
+	rad_y = tr->rotation_y * (M_PI / 180.0);
+	rad_z = tr->rotation_z * (M_PI / 180.0);
+	// Rotate around the X-axis.
+	rotated.x = pt.x;
+	rotated.y = pt.y * cos(rad_x) - pt.z_val * sin(rad_x);
+	rotated.z_val = pt.y * sin(rad_x) + pt.z_val * cos(rad_x);
+	// Rotate around the Y-axis.
+	temp.x = rotated.x * cos(rad_y) + rotated.z_val * sin(rad_y);
+	temp.y = rotated.y;
+	temp.z_val = -rotated.x * sin(rad_y) + rotated.z_val * cos(rad_y);
+	rotated = temp;
+	// Rotate around the Z-axis.
+	temp.x = rotated.x * cos(rad_z) - rotated.y * sin(rad_z);
+	temp.y = rotated.x * sin(rad_z) + rotated.y * cos(rad_z);
+	temp.z_val = rotated.z_val;
+	rotated = temp;
+	return (rotated);
+}
+
+
 
 /**
  * @brief Projects a 3D point to isometric coordinates (2D)
@@ -6,23 +67,21 @@
 */
 static t_point_iso	project_pt_to_iso(t_point pt, t_transform *tr)
 {
-	double		angle;
 	double		scale;
+	double		angle_iso;
 	t_point_iso	pt_iso;
 
-	angle = 30 * (M_PI / 180.0);         // 30° in radians
+	angle_iso = 30 * (M_PI / 180.0);         // 30° in radians
 	scale = 15.0 * tr->zoom;             // Scale factor multiplied by zoom
 
+	
 	// Compute basic isometric coordinates, scaled by the zoom factor.
-	pt_iso.x = (int)(((pt.x - pt.y) * cos(angle)) * scale);
-	pt_iso.y = (int)((((pt.x + pt.y) * sin(angle)) - pt.z) * scale);
-
-	// Apply translation offsets from the transformation structure.
-	pt_iso.x += tr->translation_x;
-	pt_iso.y += tr->translation_y;
-
-	pt_iso.z_val = pt.z;               // Preserve the original z value
-	pt_iso.color = DEFAULT_COLOR;      // Set the default color
+	pt_iso.x = (int)(((pt.x - pt.y) * cos(angle_iso)) * scale);
+	pt_iso.y = (int)((((pt.x + pt.y) * sin(angle_iso)) - pt.z) * scale);
+	pt_iso = rotate_3d(pt_iso, tr);
+	add_rotation(&pt_iso, tr);
+	add_translation(&pt_iso, tr);
+	pt_iso.z_val = pt.z;
 	return (pt_iso);
 }
 
