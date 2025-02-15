@@ -44,6 +44,7 @@ Gitclone the repository
 ```
 git clone git@github.com:sknefi/FdF.git
 ```
+Build application
 ```
 make 
 ```
