@@ -40,9 +40,9 @@ Implements full `3D` rotations (using rotation matrices around the X, Y, and Z a
 ![Showcase](./surface.png)<br>
 
 ## Usage
-Gitclone the repository
+Git clone the repository with submodules `libft_divinus` and `MLX_42`
 ```
-git clone git@github.com:sknefi/FdF.git
+git clone --recursive git@github.com:sknefi/FdF.git
 ```
 Build application
 ```
@@ -53,6 +53,12 @@ Add binary with map to render
 ```
 ./fdf map.fdf
 ```
+
+Some binaries are stored in test_maps/
+```
+./fdf test_maps/pylone.fdf
+```
+
 Example of .fdf file:
 ```
 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
