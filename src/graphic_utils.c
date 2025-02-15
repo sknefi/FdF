@@ -1,11 +1,11 @@
 #include "fdf.h"
 
-void	apply_offset(t_point_pr *p1, t_point_pr *p2, t_map *map)
+void	apply_offset(t_pt_pr *p1, t_pt_pr *p2, t_map *map)
 {
 	int		offset_x;
 	int		offset_y;
 
-	offset_x = (int)(IMAGE_WIDTH - map->window_width) / 1.5;
+	offset_x = (int)(IMAGE_WIDTH - map->window_width) / 2;
 	offset_y = (int)(IMAGE_HEIGHT - map->window_height) / 2;
 	p1->x += offset_x;
 	p1->y += offset_y;

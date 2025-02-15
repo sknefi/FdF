@@ -36,6 +36,7 @@ Implements full `3D` rotations (using rotation matrices around the X, Y, and Z a
 + `[ESC]` Exit: Press ESC to close the application
 + `[B, N]` Projection: Change between Isometric and Parallel
 + `[M]` Colors: Switch between 2 types of color pallets
++ `[R]` Reset: Map reset to default values
   
 ![Showcase](./surface.png)<br>
 
@@ -56,7 +57,7 @@ Add binary with map to render
 
 Some binaries are stored in test_maps/
 ```
-./fdf test_maps/pylone.fdf
+./fdf test_maps/42.fdf
 ```
 
 Example of .fdf file:

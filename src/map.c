@@ -13,7 +13,7 @@ static int	insert_points(t_map *map, char **split_line, int curr_y_index)
 	map->matrix[curr_y_index] = (t_point *)
 		malloc(sizeof(t_point) * map->width_x_axis);
 	if (map->matrix[curr_y_index] == NULL)
-		return (-1); // error
+		return (-1);
 	curr_x_index = 0;
 	while (split_line[curr_x_index])
 	{
@@ -123,7 +123,7 @@ void	draw_pr_map(t_app *app)
 {
 	int			i;
 	int			j;
-	t_point_pr	p1;
+	t_pt_pr		p1;
 
 	i = 0;
 	while (i < app->map->height_y_axis)
