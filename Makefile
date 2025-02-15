@@ -42,6 +42,9 @@ all: $(NAME)
 
 # Link .o to executable
 $(NAME): $(OBJS)
+	make -C $(LIBFT_DIR)
+	cmake -B $(MLX42_DIR)/build -S $(MLX42_DIR)
+	cmake --build $(MLX42_DIR)/build -j
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42_LIB) $(MLX42_INC) $(LIBS) -o $(NAME)
 
 # Compile .c to .o
@@ -50,13 +53,13 @@ $(NAME): $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
-#make -C $(LIBFT_DIR) clean
+	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
-#make -C $(LIBFT_DIR) fclean
+	make -C $(LIBFT_DIR) fclean
 
-# Build libft
+# Build only libft
 libft:
 	make -C $(LIBFT_DIR) re
 
