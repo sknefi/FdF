@@ -1,21 +1,15 @@
 #include "fdf.h"
 
 /**
- * @brief Handles the key presses
+ * @brief Handles the movement of the map
  * @param param The app structure
 */
-static void	ft_hook(void *param)
+static void	ft_hook_movement(void *param)
 {
 	t_app	*app;
 
 	app = param;
-	if (mlx_is_key_down(app->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(app->mlx);
-	else if (mlx_is_key_down(app->mlx, MLX_KEY_K))
-		zoom_in(app);
-	else if (mlx_is_key_down(app->mlx, MLX_KEY_L))
-		zoom_out(app);
-	else if (mlx_is_key_down(app->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(app->mlx, MLX_KEY_A))
 		translate_x_left(app);
 	else if (mlx_is_key_down(app->mlx, MLX_KEY_D))
 		translate_x_right(app);
@@ -27,6 +21,23 @@ static void	ft_hook(void *param)
 		rotate_2d_left(app);
 	else if (mlx_is_key_down(app->mlx, MLX_KEY_E))
 		rotate_2d_right(app);
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_K))
+		zoom_in(app);
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_L))
+		zoom_out(app);
+}
+
+/**
+ * @brief Handles the extra features of the map
+ * @param param The app structure
+*/
+static void	ft_hook_extra(void *param)
+{
+	t_app	*app;
+
+	app = param;
+	if (mlx_is_key_down(app->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(app->mlx);
 	else if (mlx_is_key_down(app->mlx, MLX_KEY_B))
 		change_projection(app, ISOMETRIC);
 	else if (mlx_is_key_down(app->mlx, MLX_KEY_N))
@@ -52,7 +63,8 @@ int	main(int argc, char **argv)
 	if (update_app(&app, argv[1]) < 0)
 		return (clean_app(&app), ft_error("Failed to update the app"), 1);
 	redraw_map(&app);
-	mlx_loop_hook(app.mlx, ft_hook, &app);
+	mlx_loop_hook(app.mlx, ft_hook_extra, &app);
+	mlx_loop_hook(app.mlx, ft_hook_movement, &app);
 	mlx_loop(app.mlx);
 	clean_app(&app);
 	return (EXIT_SUCCESS);

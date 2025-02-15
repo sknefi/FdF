@@ -8,13 +8,13 @@ SRCS        = 	\
 				src/matrix/translate.c \
 				src/matrix/zoom.c \
 				src/matrix/rotate_2d.c \
-				src/app.c \
 				src/utils.c \
 				src/map.c \
 				src/memory_cleanup.c \
 				src/projection.c \
 				src/graphic.c \
 				src/graphic_utils.c \
+				src/app.c \
 				src/main.c \
 
 OBJS        = $(SRCS:.c=.o)

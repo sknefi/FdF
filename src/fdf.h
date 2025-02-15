@@ -170,12 +170,6 @@ typedef struct s_app
 int		new_line_count(char *filename);
 
 /**
- * @brief Creates a map structure and fills it with the values from the file
- * @param filename The filename
-*/
-t_map	*parse_map(char *filename);
-
-/**
  * @brief Checks if the filename is valid
  * @param filename The filename
 */
@@ -294,6 +288,19 @@ t_pt_pr	project_pt(t_point *pt, t_transform *tr);
  * @param app The application structure
 */
 void	reset_map(t_app *app);
+
+/**
+ * @brief Fills the matrix with the values from the file
+ * @param map The map structure
+ * @param filename The filename
+*/
+int		fill_matrix(t_map *map, char *filename);
+
+/**
+ * @brief Finds the minimum and maximum values in the matrix (on the z axis)
+ * @param map The map structure
+*/
+void	find_min_max_in_matrix(t_map *map);
 
 /**
  * @brief Changes the colors of the map, MLX42 has function mlx_is_key_down()
