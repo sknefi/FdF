@@ -32,6 +32,7 @@ static void	add_rotation(t_point_pr *pt, t_transform *tr)
 /**
  * @brief Projects a 3D point to isometric coordinates (2D)
  * @param pt The 3D point
+ * @param tr The transformation structure
 */
 static t_point_pr	project_pt_to_iso(t_point *pt, t_transform *tr)
 {
@@ -50,6 +51,11 @@ static t_point_pr	project_pt_to_iso(t_point *pt, t_transform *tr)
 	return (pt_iso);
 }
 
+/**
+ * @brief Projects a 3D point to parallel coordinates (2D)
+ * @param pt The 3D point
+ * @param tr The transformation structure
+*/
 static t_point_pr	project_pt_to_parallel(t_point *pt, t_transform *tr)
 {
 	t_point_pr	pt_par;

@@ -34,7 +34,7 @@ static void	ft_hook(void *param)
 	else if (mlx_is_key_down(app->mlx, MLX_KEY_R))
 		reset_map(app);
 	else if (mlx_is_key_down(app->mlx, MLX_KEY_M))
-		change_colors(app, 0x81F4E1FF, 0xFFC857FF);
+		change_colors(app, 0x81F4E1FF, 0x00000000);
 }
 
 int	main(int argc, char **argv)
