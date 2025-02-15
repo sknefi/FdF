@@ -108,6 +108,8 @@ t_map	*parse_map(char *filename)
 	map->height_y_axis = nl_count;
 	map->window_width = WINDOW_WIDTH;
 	map->window_height = WINDOW_HEIGHT;
+	map->start_color = START_COLOR;
+	map->end_color = END_COLOR;
 	map->matrix = (t_point **)malloc(sizeof(t_point *) * nl_count);
 	if (!map->matrix)
 		return (free(map), NULL);

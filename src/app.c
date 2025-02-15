@@ -35,3 +35,17 @@ int	update_app(t_app *app, char *filename)
 		return (-1);
 	return (1);
 }
+
+void	reset_map(t_app *app)
+{
+	app->transform->rotation = 0;
+	app->transform->zoom = 1;
+	app->transform->translation_x = 0;
+	app->transform->translation_y = 0;
+	app->transform->projection = ISOMETRIC;
+	mlx_delete_image(app->mlx, app->img);
+	app->img = mlx_new_image(app->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
+	draw_pr_map(app);
+	if (mlx_image_to_window(app->mlx, app->img, 0, 0) < 0)
+		ft_error(mlx_strerror(mlx_errno));
+}

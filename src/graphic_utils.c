@@ -58,8 +58,8 @@ int	calc_color(t_map *map, t_line_params *line)
 	int		start_color;
 	float	percent;
 
-	start_color = START_COLOR;
-	end_color = END_COLOR;
+	start_color = map->start_color;
+	end_color = map->end_color;
 	z_avg = (line->p1->z_val + line->p2->z_val) / 2;
 	percent = (float)(z_avg - map->min_z) / (map->max_z - map->min_z);
 	if (percent < 0)
@@ -67,4 +67,25 @@ int	calc_color(t_map *map, t_line_params *line)
 	if (percent > 1)
 		percent = 1;
 	return (interpolate_color(start_color, end_color, percent));
+}
+
+void	change_colors(t_app *app, int start_color, int end_color)
+{
+	static int	itr;
+
+	if (itr++ % 2 == 0)
+	{
+		app->map->start_color = start_color;
+		app->map->end_color = end_color;
+	}
+	else
+	{
+		app->map->start_color = START_COLOR;
+		app->map->end_color = END_COLOR;
+	}
+	mlx_delete_image(app->mlx, app->img);
+	app->img = mlx_new_image(app->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
+	draw_pr_map(app);
+	if (mlx_image_to_window(app->mlx, app->img, 0, 0) < 0)
+		ft_error(mlx_strerror(mlx_errno));
 }

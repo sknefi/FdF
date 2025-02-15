@@ -108,6 +108,8 @@ typedef struct s_map
 	int		window_height;
 	int		width_x_axis;
 	int		height_y_axis;
+	int		start_color;
+	int		end_color;
 	t_point	**matrix;
 }	t_map;
 
@@ -286,5 +288,13 @@ void	change_projection(t_app *app, t_projection_type projection);
  * the transform structure
 */
 t_point_pr	project_pt(t_point *pt, t_transform *tr);
+
+/**
+ * @brief Resets the map to the initial state
+ * @param app The application structure
+*/
+void	reset_map(t_app *app);
+
+void	change_colors(t_app *app, int start_color, int end_color);
 
 #endif

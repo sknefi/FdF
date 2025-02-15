@@ -11,26 +11,30 @@ static void	ft_hook(void *param)
 	app = param;
 	if (mlx_is_key_down(app->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(app->mlx);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_K))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_K))
 		zoom_in(app);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_L))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_L))
 		zoom_out(app);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_A))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_A))
 		translate_x_left(app);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_D))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_D))
 		translate_x_right(app);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_W))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_W))
 		translate_y_up(app);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_S))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_S))
 		translate_y_down(app);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_Q))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_Q))
 		rotate_2d_left(app);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_E))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_E))
 		rotate_2d_right(app);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_B))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_B))
 		change_projection(app, ISOMETRIC);
-	if (mlx_is_key_down(app->mlx, MLX_KEY_N))
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_N))
 		change_projection(app, PARALLEL);
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_R))
+		reset_map(app);
+	else if (mlx_is_key_down(app->mlx, MLX_KEY_M))
+		change_colors(app, 0x81F4E1FF, 0xFFC857FF);
 }
 
 int	main(int argc, char **argv)
