@@ -8,8 +8,8 @@
 # include <fcntl.h>
 # include "../libft_divinus/libft.h"
 
-// pr - projected
 // pt - point
+// pr - projected
 // iso - isometric
 // par - parallel
 
@@ -225,48 +225,56 @@ int		update_app(t_app *app, char *filename);
 /**
  * @brief Zoom in the map by a constant factor,
  * works for isometric and parallel projection 
+ * @param app The application structure
 */
 void	zoom_in(t_app *app);
 
 /**
  * @brief Zoom out the map by a constant factor,
  * works for isometric and parallel projection 
+ * @param app The application structure
 */
 void	zoom_out(t_app *app);
 
 /**
  * @brief Translate the map to the left by a constant factor,
  * works for isometric and parallel projection 
+ * @param app The application structure
 */
 void	translate_x_left(t_app *app);
 
 /**
  * @brief Translate the map to the right by a constant factor,
  * works for isometric and parallel projection 
+ * @param app The application structure
 */
 void	translate_x_right(t_app *app);
 
 /**
  * @brief Translate the map up by a constant factor,
  * works for isometric and parallel projection 
+ * @param app The application structure
 */
 void	translate_y_up(t_app *app);
 
 /**
  * @brief Translate the map down by a constant factor,
  * works for isometric and parallel projection 
+ * @param app The application structure
 */
 void	translate_y_down(t_app *app);
 
 /**
  * @brief Rotate the map to the left by a constant factor,
  * works for isometric projection 
+ * @param app The application structure
 */
 void	rotate_2d_left(t_app *app);
 
 /**
  * @brief Rotate the map to the right by a constant factor,
  * works for isometric projection 
+ * @param app The application structure
 */
 void	rotate_2d_right(t_app *app);
 
@@ -280,6 +288,8 @@ void	change_projection(t_app *app, t_projection_type projection);
 /**
  * @brief Projects point to isometric or parallel projection, based on 
  * the transform structure
+ * @param pt The 3D point
+ * @param tr The transformation structure
 */
 t_pt_pr	project_pt(t_point *pt, t_transform *tr);
 
@@ -315,6 +325,7 @@ void	change_colors(t_app *app, int start_color, int end_color);
 
 /**
  * @brief Redraws the map, used for the loop hook
+ * @param app The application structure
 */
 void	redraw_map(t_app *app);
 
