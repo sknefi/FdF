@@ -83,9 +83,5 @@ void	change_colors(t_app *app, int start_color, int end_color)
 		app->map->start_color = START_COLOR;
 		app->map->end_color = END_COLOR;
 	}
-	mlx_delete_image(app->mlx, app->img);
-	app->img = mlx_new_image(app->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
-	draw_pr_map(app);
-	if (mlx_image_to_window(app->mlx, app->img, 0, 0) < 0)
-		ft_error(mlx_strerror(mlx_errno));
+	redraw_map(app);
 }

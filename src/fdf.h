@@ -295,6 +295,20 @@ t_point_pr	project_pt(t_point *pt, t_transform *tr);
 */
 void	reset_map(t_app *app);
 
+/**
+ * @brief Changes the colors of the map, MLX42 has function mlx_is_key_down()
+ * that is used to check if a key is pressed, and then change the colors, problem
+ * is that this function is "to fast" and the colors change too fast, so we need
+ * to press the key multiple times to see the change
+ * @param app The application structure
+ * @param start_color The new start color
+ * @param end_color The new end color
+*/
 void	change_colors(t_app *app, int start_color, int end_color);
+
+/**
+ * @brief Redraws the map, used for the loop hook
+*/
+void	redraw_map(t_app *app);
 
 #endif

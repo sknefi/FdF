@@ -51,9 +51,7 @@ int	main(int argc, char **argv)
 		ft_error(mlx_strerror(mlx_errno));
 	if (update_app(&app, argv[1]) < 0)
 		return (clean_app(&app), ft_error("Failed to update the app"), 1);
-	draw_pr_map(&app);
-	if (mlx_image_to_window(app.mlx, app.img, 0, 0) < 0)
-		ft_error(mlx_strerror(mlx_errno));
+	redraw_map(&app);
 	mlx_loop_hook(app.mlx, ft_hook, &app);
 	mlx_loop(app.mlx);
 	clean_app(&app);

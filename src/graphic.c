@@ -64,3 +64,15 @@ void	draw_line(t_map *map, mlx_image_t *img, t_point_pr p1, t_point_pr p2)
 	line.p2 = &p2;
 	bresenham_line_loop(img, map, &line);
 }
+
+void	redraw_map(t_app *app)
+{
+	mlx_delete_image(app->mlx, app->img);
+	app->img = mlx_new_image(app->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
+	draw_pr_map(app);
+	if (mlx_image_to_window(app->mlx, app->img, 0, 0) < 0)
+	{
+		clean_app(app);
+		ft_error(mlx_strerror(mlx_errno));
+	}
+}
