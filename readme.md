@@ -1,7 +1,7 @@
 # FdF
 This project is an implementation of the classic `FdF` (`Fil de Fer`) project from `42`. It renders a `3D` wireframe model of a landscape (or any `3D` map) from a file containing height values. The project uses `MLX42` for graphical output and includes bonus features such as multiple projection modes, interactive zooming, rotation, and translation.
 
-![Showcase](./42.png)<br>
+![Showcase](./photos/42.png)<br>
 
 ## Overview
 ### 3D Visualization:
@@ -16,7 +16,7 @@ Implemented `Isometric` and `Parallel` projection
 ### Gradient Coloring:
 Lines are colored with a gradient effect based on the `z-values`, providing a better sense of depth.
 
-![Showcase](./pyramid.png)<br>
+![Showcase](./photos/pyramid.png)<br>
 
 ## Features
 ### File Parsing:
@@ -38,7 +38,7 @@ Implements full `3D` rotations (using rotation matrices around the X, Y, and Z a
 + `[M]` Colors: Switch between 2 types of color pallets
 + `[R]` Reset: Map reset to default values
   
-![Showcase](./surface.png)<br>
+![Showcase](./photos/surface.png)<br>
 
 ## Usage
 Git clone the repository with submodules `libft_divinus` and `MLX_42`
