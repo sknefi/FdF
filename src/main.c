@@ -63,8 +63,8 @@ int	main(int argc, char **argv)
 	if (update_app(&app, argv[1]) < 0)
 		return (clean_app(&app), ft_error("Failed to update the app"), 1);
 	redraw_map(&app);
-	mlx_loop_hook(app.mlx, ft_hook_extra, &app);
 	mlx_loop_hook(app.mlx, ft_hook_movement, &app);
+	mlx_loop_hook(app.mlx, ft_hook_extra, &app);
 	mlx_loop(app.mlx);
 	clean_app(&app);
 	return (EXIT_SUCCESS);

@@ -16,7 +16,7 @@ static void	safe_put_pixel(mlx_image_t *img, int x, int y, int color)
 }
 
 /**
- * @brief Draws a line between two isometric points, Bresenham's line algorithm
+ * @brief Draws a line between two projected points, Bresenham's line algorithm
  * @param img The image
  * @param line The line parameters
 */

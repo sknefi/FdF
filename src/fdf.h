@@ -166,6 +166,7 @@ typedef struct s_app
 /**
  * @brief Counts the number of new lines in the file
  * @param filename The filename
+ * @return -1 when error, 0 when no new lines, n when n new lines
 */
 int		new_line_count(char *filename);
 
@@ -192,8 +193,9 @@ void	draw_pr_map(t_app *app);
 void	draw_line(t_map *map, mlx_image_t *img, t_pt_pr p1, t_pt_pr p2);
 
 /**
- * @brief Adds an offset to the isometric points - centering the drawing 
- * on the screen (mainly for first time drawing)
+ * @brief Adds an offset to the projected points - centering the drawing 
+ * on the screen (mainly for first time drawing before translation [W, A, S, D] 
+ * has been applied by user)
  * @param p1 The first point
  * @param p2 The second point
 */
