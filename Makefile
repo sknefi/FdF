@@ -1,5 +1,3 @@
-# before eval I have to add also build for MLX42
-
 # Project Name
 NAME        = fdf
 
