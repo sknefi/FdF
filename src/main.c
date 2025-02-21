@@ -59,7 +59,10 @@ int	main(int argc, char **argv)
 		ft_error(mlx_strerror(mlx_errno));
 	app.img = mlx_new_image(app.mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
 	if (!app.img)
+	{
+		mlx_terminate(app.mlx);
 		ft_error(mlx_strerror(mlx_errno));
+	}
 	if (update_app(&app, argv[1]) < 0)
 		return (clean_app(&app), ft_error("Failed to update the app"), 1);
 	redraw_map(&app);
